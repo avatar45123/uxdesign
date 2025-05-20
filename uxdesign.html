@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicStudy - Plateforme Médicale Interactive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f5f5; /* Gris très clair, plus moderne */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrer le contenu horizontalement */
+        }
+
+        header {
+            background-color: #ffffff; /* Blanc */
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between; /* Espace entre le titre et la navigation */
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0; /* Bordure subtile */
+            width: 100%; /* Assurer la pleine largeur */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Ombre légère */
+            box-sizing: border-box;
+        }
+
+        header div {
+            font-size: 24px; /* Taille de police plus grande pour le titre */
+            font-weight: 600; /* Police semi-gras */
+            color: #ff6f61; /* Couleur corail, plus vive */
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #555; /* Gris moyen */
+            font-weight: 600; /* Police semi-gras */
+            transition: color 0.3s ease; /* Transition plus douce */
+            font-size: 16px; /* Taille de police légèrement plus grande */
+        }
+
+        nav a:hover {
+            color: #ff6f61; /* Corail au survol */
+        }
+
+        .main {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            width: 100%; /* Assurer la pleine largeur */
+            max-width: 1200px; /* Limiter la largeur maximale pour une meilleure lisibilité */
+            box-sizing: border-box;
+        }
+
+        .left, .right {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px; /* Augmenter le padding */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+            transition: transform 0.2s ease; /* Ajout de transition pour un effet subtil */
+        }
+
+        .left:hover, .right:hover {
+            transform: translateY(-4px); /* Léger mouvement vers le haut au survol */
+        }
+
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            overflow: hidden;
+            margin-bottom: 15px; /* Augmenter la marge */
+        }
+
+        .bar {
+            height: 100%;
+            background-color: #ff6f61; /* Corail */
+            transition: width 0.5s ease; /* Transition plus douce */
+        }
+
+        .bar-80 { width: 80%; }
+        .bar-50 { width: 50%; }
+        .bar-40 { width: 40%; }
+        .bar-30 { width: 30%; }
+
+        .button {
+            background-color: #ff6f61; /* Corail */
+            color: white;
+            padding: 12px 25px; /* Augmenter le padding */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600; /* Police semi-gras */
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Transition plus douce */
+            font-size: 16px; /* Taille de police légèrement plus grande */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        .button:hover {
+            background-color: #ff4535; /* Rouge orangé plus foncé */
+            transform: scale(1.05); /* Léger agrandissement au survol */
+        }
+
+        .card {
+            background-color: #fffafa; /* Rose très clair, plus doux */
+            border-radius: 12px;
+            padding: 20px; /* Augmenter le padding */
+            margin-top: 20px; /* Augmenter la marge */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Ombre légère */
+            transition: background-color 0.3s ease;
+        }
+
+        .card:hover{
+             background-color: #fff0f0;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #ff6f61; /* Corail */
+            font-size: 28px; /* Augmenter la taille de la police */
+            font-weight: 700; /* Police gras */
+            margin-bottom: 20px; /* Ajouter de l'espace après le titre */
+        }
+
+        #timer {
+            font-size: 24px; /* Augmenter la taille de la police */
+            font-weight: bold;
+            color: #ff6f61; /* Corail */
+            margin: 15px 0; /* Augmenter la marge */
+        }
+
+        .prof-card {
+            display: flex;
+            align-items: center;
+            background-color: #f8f8f8; /* Gris très clair, plus moderne */
+            border-radius: 10px;
+            padding: 20px; /* Augmenter le padding */
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .prof-card img {
+            width: 80px; /* Augmenter la taille de l'image */
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px; /* Augmenter la marge */
+            border: 2px solid #ff6f61; /* Ajouter une bordure */
+        }
+
+        .quiz-question {
+            margin-top: 25px; /* Augmenter la marge */
+        }
+
+        .quiz-question h4 {
+            margin: 15px 0; /* Augmenter la marge */
+            font-size: 18px; /* Augmenter la taille de la police */
+            color: #333; /* Darker color */
+            font-weight: 600;
+        }
+
+        .quiz-question label {
+            display: block;
+            margin-bottom: 12px; /* Augmenter la marge */
+            cursor: pointer;
+            font-size: 16px;
+            color: #444;
+        }
+
+        .quiz-question label input{
+            margin-right: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px; /* Augmenter la marge */
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px; /* Augmenter le padding */
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #ffe0f0; /* Rose très clair */
+            color: #ff6f61;
+            font-weight: 600;
+        }
+
+        .input-full {
+            width: 100%;
+            padding: 12px; /* Augmenter le padding */
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .input-full:focus {
+            outline: none;
+            border-color: #ff6f61;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .margin-top {
+            margin-top: 10px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .assistant-ia-image {
+            width: 150px; /* Increased size */
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>📖 MedicStudy</div>
+        <nav>
+            <a href="#">Accueil</a>
+            <a href="#">Cours</a>
+            <a href="#">Quiz</a>
+            <a href="#">Examens</a>
+            <a href="#">Bibliothèque</a>
+            <a href="#">Tutorat</a>
+            <a href="#">Accompagnement</a>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="left">
+            <h2>📚 Bibliothèque</h2>
+            <input type="text" placeholder="Rechercher un mot-clé..." class="input-full">
+
+            <h3 style="margin-top: 30px;">Progression</h3>
+            <p>Anatomie 80%</p>
+            <div class="progress-bar"><div class="bar bar-80"></div></div>
+            <p>Physiologie 50%</p>
+            <div class="progress-bar"><div class="bar bar-50"></div></div>
+            <p>Pathologie 40%</p>
+            <div class="progress-bar"><div class="bar bar-40"></div></div>
+            <p>Pharmacologie 30%</p>
+            <div class="progress-bar"><div class="bar bar-30"></div></div>
+
+            <div class="card">
+                <h3>🧠 Guide d’anatomie</h3>
+                <p>Tout savoir sur les structures du corps humain</p>
+                <button class="button">Lire</button>
+            </div>
+
+            <div class="card">
+                <h3>⏱️ Quiz en cours</h3>
+                <p>Temps restant :</p>
+                <div id="timer">03:00</div>
+                <button class="button" onclick="startTimer()">Démarrer le quiz</button>
+            </div>
+
+            <div class="card quiz-question">
+                <h3>❓ Question</h3>
+                <h4>Quel est l’organe principal de la circulation sanguine ?</h4>
+                <label><input type="radio" name="q1"> Foie</label>
+                <label><input type="radio" name="q1"> Cerveau</label>
+                <label><input type="radio" name="q1" checked> Cœur</label>
+                <label><input type="radio" name="q1"> Poumons</label>
+                <button class="button margin-top">Valider</button>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="text-center">
+                <img src="https://img.icons8.com/color/96/doctor-female.png" alt="Assistant IA" class="assistant-ia-image">
+                <h3>Assistant IA Médical</h3>
+                <p>Posez vos questions médicales à notre assistant intelligent.</p>
+            </div>
+
+            <div class="card">
+                <h4>💡 Intelligence Artificielle en Santé</h4>
+                <p>Applications et défis de l’IA dans le domaine médical.</p>
+                <button class="button">Découvrir</button>
+            </div>
+
+            <div class="prof-card">
+                <img src="https://img.icons8.com/ios-filled/100/doctor-male.png" alt="Professeur">
+                <div>
+                    <strong>Dr. Thomas Morel</strong><br>
+                    <span>Spécialiste en Cardiologie</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>📊 Classement des étudiants</h4>
+                <table>
+                    <tr><th>Nom</th><th>Score</th><th>Spécialité</th></tr>
+                    <tr><td>Alice M.</td><td>95%</td><td>Neurologie</td></tr>
+                    <tr><td>David R.</td><td>88%</td><td>Pharmacologie</td></tr>
+                    <tr><td>Sarah L.</td><td>85%</td><td>Pédiatrie</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let countdown;
+        function startTimer() {
+            clearInterval(countdown);
+            let time = 180; // 3 minutes
+
+            countdown = setInterval(() => {
+                let minutes = Math.floor(time / 60);
+                let seconds = time % 60;
+                document.getElementById('timer').textContent =
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                time--;
+
+                if (time < 0) {
+                    clearInterval(countdown);
+                    document.getElementById('timer').textContent = "Temps écoulé !";
+                    alert("Le temps est terminé !");
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
